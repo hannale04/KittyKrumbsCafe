@@ -12,19 +12,34 @@ public class Order {
 	public Order(int numItems, Inventory inventory) {
 		this.orderCost = 0;
 		System.out.println("Creating order with " + numItems + " items...");
-		
+		boolean exists;
+		MenuItem menuItem;
 		for (int i = 0; i < numItems; i++) {
-			MenuItem menuItem = inventory.getRandomMenuItem(); 
-		if(menuItem != null) {
-			order.add(menuItem);
-			orderCost+= menuItem.getPrice();
-		} else {
-			System.out.println("Error: Random menu item is null");
+			menuItem = inventory.getRandomMenuItem(); 
+			while(true) {
+				exists = order.contains(menuItem);
+				if (! exists) {
+					order.add(menuItem);
+					orderCost+= menuItem.getPrice();
+					break;
+				}
+				else {
+					menuItem = inventory.getRandomMenuItem(); 
+				}
 			}
 		}
 	}
+	
 	public ArrayList<MenuItem> getOrder(){
 		return order;
+	}
+	
+	public ArrayList<Integer> getOrderIds(){
+		ArrayList<Integer> ids = new ArrayList<>();
+		for(int i=0; i<order.size(); i++) {
+			ids.add(order.get(i).getId());
+		}
+		return ids;
 	}
 	
 	@Override

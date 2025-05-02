@@ -1,44 +1,58 @@
 package interfaces;
 import javafx.application.Application;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class StartScreen extends Application {
-	
-	private Runnable onStartGameBtClicked;
-	
-	 public void setOnStartGameBtClicked(Runnable onStartGameBtClicked) {
-	        this.onStartGameBtClicked = onStartGameBtClicked;
-	 }
+//	private Runnable onStartGameBtClicked;
+//	
+//	 public void setOnStartGameBtClicked(Runnable onStartGameBtClicked) {
+//	        this.onStartGameBtClicked = onStartGameBtClicked;
+//	 }
 	
 	@Override
 	public void start(Stage primaryStage) {
-		//Create start screen scene
-		Text welcomeText = new Text("Welcome to Kitty Krumbs Café!");
-		Button startButton = new Button("Start Game");
+		Image startImage = new Image("file:images/kittykrumbsstartscreen.png");
+		ImageView backgroundImage = new ImageView(startImage);
+		
+		Pane startLayout = new Pane();
+		backgroundImage.fitWidthProperty().bind(startLayout.widthProperty());
+		backgroundImage.fitHeightProperty().bind(startLayout.heightProperty());
+		
+		Button startButton = new Button();
+        startButton.setStyle("-fx-background-color: transparent; -fx-cursor: hand;");
+		startButton.setPrefSize(230, 90);
+		startButton.setLayoutX(470);
+		startButton.setLayoutY(520);
 		startButton.setOnAction(e -> {
-			if(onStartGameBtClicked != null) {
-				onStartGameBtClicked.run();
-			}
+			MainScreen mainScreen = new MainScreen();
 		});
 		
-		StackPane layout = new StackPane();
-		layout.getChildren().addAll(welcomeText, startButton);
+		startLayout.getChildren().addAll(backgroundImage, startButton);
 		startButton.setTranslateY(40);
 		
-		Scene startScene = new Scene(layout, 1200, 800);
-		
+		Scene startScene = new Scene(startLayout, 1200, 800);
 		primaryStage.setTitle("Kitty Krumbs Café");
 		primaryStage.setScene(startScene);
 		primaryStage.show();
 	}
 	
-	public void launchStartScreen() {
-		launch();
+	
+	public static void main(String[] args) {
+		launch(args);
 	}
 }
 

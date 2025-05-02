@@ -1,16 +1,22 @@
 package gameobjects;
 
 public class MenuItem {
+	private int id;
 	private String name;
 	private int price;
 	private String category;
 	private String description;
 	
-	public MenuItem(String name, int price, String category, String description) {
+	public MenuItem(int id, String name, int price, String category, String description) {
+		this.id = id;
 		this.name = name;
 		this.price = price;
 		this.category = category;
 		this.description = description;		
+	}
+	
+	public int getId() {
+		return id;
 	}
 
 	public String getName() {
@@ -29,4 +35,8 @@ public class MenuItem {
 		return description;
 	}
 
+	//To-string that returns name
+	public String toString() {
+		return name;
+	}
 }

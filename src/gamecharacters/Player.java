@@ -33,7 +33,7 @@ public class Player {
 		//Get ingredients
 	}
 	
-	public void serveOrder(String order, String customerName) {
+	public void serveOrder() {
 		
 	}
 }

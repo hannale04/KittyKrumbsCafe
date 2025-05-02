@@ -5,9 +5,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
+import database.Inventory;
 
 import gameobjects.MenuItem;
+import javafx.scene.control.ComboBox;
 
 public class Inventory {
 	ArrayList<MenuItem> inventory = new ArrayList<>();
@@ -24,19 +27,23 @@ public class Inventory {
 			ResultSet resultSet = statement.executeQuery(query)) {
 				
 			while(resultSet.next()) {
+				int id = resultSet.getInt("id");
 				String name = resultSet.getString("name");
 		        int price = resultSet.getInt("price");
 		        String category = resultSet.getString("category");
 		        String description = resultSet.getString("description");
 	
-		        MenuItem menuItem = new MenuItem(name, price, category, description);
+		        MenuItem menuItem = new MenuItem(id, name, price, category, description);
 		        inventory.add(menuItem);
 		        switch(menuItem.getCategory()) {
+			        case "Pastry" :
+			        	food.add(menuItem);
+			        	System.out.println("Menu item: " + menuItem.toString());
+			        	break;
+			        	
 			        case "Drink" : 
 			        	drinks.add(menuItem);
-			        	break;
-			        case "Food" :
-			        	food.add(menuItem);
+			        	System.out.println("drink Menu item: " + menuItem.toString());
 			        	break;
 			        case "Special" :
 			        	specials.add(menuItem);
@@ -53,9 +60,10 @@ public class Inventory {
 		return inventory;
 	}
 	
-	public ArrayList<MenuItem> getPastry() {
+	public ArrayList<MenuItem> getFood() {
 		return food;
 	}
+	
 	public ArrayList<MenuItem> getDrinks() {
 		return drinks;
 	}
@@ -72,4 +80,11 @@ public class Inventory {
 		int randomIndex = randomMenuItem.nextInt(inventory.size());
         return inventory.get(randomIndex);
 	}	
+	
+	public void shuffle() {
+		Collections.shuffle(food);
+		Collections.shuffle(drinks);
+		Collections.shuffle(specials);
+	}
+	
 }
