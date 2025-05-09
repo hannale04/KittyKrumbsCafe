@@ -13,6 +13,6 @@ public class Customer {
 	}
 	
 	public Order placeOrder() {
-		return new Order(numItems, inventory);
+		return new Order(inventory);
 	}
 }

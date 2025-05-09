@@ -5,14 +5,12 @@ public class MenuItem {
 	private String name;
 	private int price;
 	private String category;
-	private String description;
 	
-	public MenuItem(int id, String name, int price, String category, String description) {
+	public MenuItem(int id, String name, String category, int price) {
 		this.id = id;
 		this.name = name;
-		this.price = price;
 		this.category = category;
-		this.description = description;		
+		this.price = price;
 	}
 	
 	public int getId() {
@@ -23,16 +21,12 @@ public class MenuItem {
 		return name;
 	}
 	
-	public int getPrice() {
-		return price;
-	}
-	
 	public String getCategory() {
 		return category;
 	}
-
-	public String getDescription() {
-		return description;
+	
+	public int getPrice() {
+		return price;
 	}
 
 	//To-string that returns name

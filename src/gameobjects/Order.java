@@ -1,15 +1,22 @@
 package gameobjects;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import database.Inventory;
+import interfaces.KitchenScreen;
+import gameobjects.Order;
+import interfaces.MainScreen;
 
 public class Order {
+	private int numItems; //Between 1-5 items
 	private int orderCost;
 	private ArrayList<MenuItem> order = new ArrayList<>();
 	
 	//Constructor
-	public Order(int numItems, Inventory inventory) {
+	public Order(Inventory inventory) {
+		Random random = new Random();
+		this.numItems = random.nextInt(5) + 1;
 		this.orderCost = 0;
 		System.out.println("Creating order with " + numItems + " items...");
 		boolean exists;
@@ -48,18 +55,37 @@ public class Order {
 		
 		for(MenuItem item : order) {
 			if(item != null) {
-				sb.append(item.getName() + " (").append(item.getPrice()).append(" coins").append(")\n");
+				sb.append("1 " + item.getName() + " \n");
 		    } else {
 		    	sb.append("null item");
 		    }
 		}
-		sb.append("Total: ").append(orderCost).append(" coins");
 		return sb.toString();
 	}
+	
+	public int getNumItems() {
+		return numItems;
+	}
+	
 	
 	//Calculate total by combining item prices
 	public int getOrderCost() {
 		return orderCost;
+	}
+	
+	public String toStringKitchen(int orderTime) {
+		StringBuilder sb = new StringBuilder();
+		
+		for(MenuItem item : order) {
+			if(item != null) {
+				sb.append(item.getName())
+				  .append(" (").append(item.getPrice()).append(" coins)\n");
+		    } else {
+		    	sb.append("null item");
+		    }
+		}
+		sb.append("\nOrder Time: ").append(orderTime).append(" seconds\n");
+		sb.append("Total: ").append(orderCost).append(" coins");		return sb.toString();
 	}
 	
 }

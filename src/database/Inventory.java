@@ -10,7 +10,6 @@ import java.util.Random;
 import database.Inventory;
 
 import gameobjects.MenuItem;
-import javafx.scene.control.ComboBox;
 
 public class Inventory {
 	ArrayList<MenuItem> inventory = new ArrayList<>();
@@ -29,14 +28,13 @@ public class Inventory {
 			while(resultSet.next()) {
 				int id = resultSet.getInt("id");
 				String name = resultSet.getString("name");
-		        int price = resultSet.getInt("price");
 		        String category = resultSet.getString("category");
-		        String description = resultSet.getString("description");
+		        int price = resultSet.getInt("price");
 	
-		        MenuItem menuItem = new MenuItem(id, name, price, category, description);
+		        MenuItem menuItem = new MenuItem(id, name, category, price);
 		        inventory.add(menuItem);
 		        switch(menuItem.getCategory()) {
-			        case "Pastry" :
+			        case "Food" :
 			        	food.add(menuItem);
 			        	System.out.println("Menu item: " + menuItem.toString());
 			        	break;

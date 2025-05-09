@@ -43,8 +43,8 @@ public class GameTimer extends HBox {
 	}
 	
 	private void styleText() {
-		timerText.setFont(Font.font("Arial", 60));
-		timerText.setFill(Color.BLUE);		
+		timerText.setFont(Font.font("Consolas", 60));
+		timerText.setFill(Color.SADDLEBROWN);		
 	}
 	
 	public void startTimer() {

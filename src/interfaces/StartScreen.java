@@ -17,15 +17,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class StartScreen extends Application {
-//	private Runnable onStartGameBtClicked;
-//	
-//	 public void setOnStartGameBtClicked(Runnable onStartGameBtClicked) {
-//	        this.onStartGameBtClicked = onStartGameBtClicked;
-//	 }
-	
 	@Override
 	public void start(Stage primaryStage) {
-		Image startImage = new Image("file:images/kittykrumbsstartscreen.png");
+		Image startImage = new Image("file:images/startscreen.png");
 		ImageView backgroundImage = new ImageView(startImage);
 		
 		Pane startLayout = new Pane();
@@ -34,11 +28,12 @@ public class StartScreen extends Application {
 		
 		Button startButton = new Button();
         startButton.setStyle("-fx-background-color: transparent; -fx-cursor: hand;");
-		startButton.setPrefSize(230, 90);
-		startButton.setLayoutX(470);
-		startButton.setLayoutY(520);
+		startButton.setPrefSize(310, 120);
+		startButton.setLayoutX(435);
+		startButton.setLayoutY(580);
 		startButton.setOnAction(e -> {
-			MainScreen mainScreen = new MainScreen();
+		
+		MainScreen mainScreen = new MainScreen();
 		});
 		
 		startLayout.getChildren().addAll(backgroundImage, startButton);
